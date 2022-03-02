@@ -1,23 +1,32 @@
 import random
 from os import system
+from ascii_arts import hangmans, title, menu, win, lose
 
 def game(word):
     word_game = word
     correct_words = ['_' for letter in word_game]
     user_word = ''
-    
-    while ''.join(correct_words) != word_game:
+    lives = 7
+
+    while ''.join(correct_words) != word_game and lives > 0:
         try:
-            print('Adivina la palabra')
+            print(title)
+            print(hangmans[lives]) 
+            print(f'Adivina la palabra (Vidas: {lives})')
             print(' '.join(correct_words))
             user_word = input('Ingresa una letra: ').upper()
         
             if len(user_word) > 1 or user_word.isdigit():
                 raise ValueError
 
+            previous_correct_words = ''.join(correct_words)
+
             for i, letra in enumerate(word_game):
                 if word_game[i] == user_word:
                     correct_words[i] = user_word
+            
+            if previous_correct_words == ''.join(correct_words):
+                lives -= 1
             
             system("cls")
         
@@ -25,7 +34,14 @@ def game(word):
             system("cls")
             print('ERROR: Ingresa solo una letra')
 
-    print(f'Ganaste!! La palabra era {word_game}')
+    if(lives <= 0):
+        print(lose)
+        print(hangmans[lives])
+        print(f'La palabra era {word_game}')
+        return 0
+
+    print(win)
+    print(f'La palabra era {word_game}')
 
 
 def normalize(word):
@@ -49,6 +65,9 @@ def getData():
 
 
 def run():
+    print(title)
+    input(menu)
+    system("cls")
     words = getData()
     word = selectWord(words)
     game(word)
