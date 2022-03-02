@@ -7,10 +7,12 @@ title = """
 |_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
                     __/ |                      
                    |___/  
-
 """
 
-menu = "           Presiona enter para empezar "
+menu = """by Mauro Brandan
+
+
+           Presiona enter para empezar """
 
 win = """
   _   _    _____                       _         _   _ 
